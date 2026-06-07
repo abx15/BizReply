@@ -1,0 +1,17 @@
+# Dependency directories
+node_modules/
+
+# Build directory
+dist/
+
+# Local env files
+.env
+.env*.local
+
+# Logs and databases
+logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
