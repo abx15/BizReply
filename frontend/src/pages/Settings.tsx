@@ -59,6 +59,7 @@ const Settings: React.FC = () => {
       setName(business.name || '');
       setWhatsappNumber(business.whatsappNumber || '');
       setWhatsappPhoneId(business.whatsappPhoneId || '');
+      setWhatsappToken((business as any).whatsappToken || '');
       setAiEnabled(business.aiEnabled ?? false);
       
       // Load Hours if exists
@@ -380,6 +381,45 @@ const Settings: React.FC = () => {
 
         {/* Sidebar credentials / Danger Zone */}
         <div className="space-y-6">
+
+          {/* WhatsApp Connection Guide */}
+          <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-2xl border border-emerald-500/20 space-y-5">
+            <div className="flex items-center gap-2">
+              <span className="p-1 bg-emerald-500/10 rounded-lg text-emerald-400">
+                <Smartphone size={18} />
+              </span>
+              <h3 className="text-base font-bold text-white">WhatsApp Connect Guide</h3>
+            </div>
+
+            <div className="space-y-4 text-xs text-slate-300 leading-relaxed">
+              <p>Follow these steps to connect your WhatsApp account:</p>
+              
+              <ol className="list-decimal pl-4 space-y-2">
+                <li>Go to <a href="https://developers.facebook.com" target="_blank" rel="noreferrer" className="text-emerald-400 underline font-semibold">Meta Developers Portal</a> and select/create your App.</li>
+                <li>Set up <strong>WhatsApp Cloud API</strong> integration.</li>
+                <li>Copy the <strong>Phone Number ID</strong> and <strong>Permanent Access Token</strong>.</li>
+                <li>Enter them in the form on the left along with your WhatsApp number and click <strong>Save Settings</strong>.</li>
+                <li>Configure the Webhook in Meta Configuration with these values:</li>
+              </ol>
+
+              <div className="p-3 bg-slate-950 rounded-xl border border-slate-850 space-y-2 font-mono text-[10.5px]">
+                <div>
+                  <div className="text-slate-500 font-semibold mb-0.5">WEBHOOK URL:</div>
+                  <div className="text-emerald-400 break-all select-all">
+                    {window.location.origin.replace('3000', '5000')}/api/webhook
+                  </div>
+                </div>
+                <div>
+                  <div className="text-slate-500 font-semibold mb-0.5">VERIFY TOKEN:</div>
+                  <div className="text-emerald-400 select-all">your_custom_webhook_verify_token</div>
+                </div>
+              </div>
+
+              <div className="text-[10px] text-slate-500 bg-emerald-500/5 p-2.5 rounded-lg border border-emerald-500/10">
+                💡 <strong>Important:</strong> Subscribe to <strong>messages</strong> webhook fields in the Meta App setup to receive and auto-reply to messages.
+              </div>
+            </div>
+          </div>
           
           {/* Password Card */}
           <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-2xl border border-slate-800/80 space-y-5">
