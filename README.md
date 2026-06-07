@@ -50,6 +50,48 @@ sequenceDiagram
 
 ---
 
+## 🔌 WhatsApp Connection & Webhook Setup Workflow
+
+Follow this step-by-step flowchart to link your Meta WhatsApp Cloud API credentials to BizReply and configure incoming message webhooks:
+
+```mermaid
+flowchart TD
+    Start([🚀 Connect WhatsApp]) --> Step1[1. Register / Login on BizReply Portal]
+    Step1 --> Step2[2. Go to Meta Developers Portal]
+    Step2 --> Step3[3. Create Meta App & Add WhatsApp Cloud API product]
+    Step3 --> Step4[4. Get Phone Number ID & System User Access Token]
+    Step4 --> Step5[5. Save credentials in BizReply Dashboard -> Settings]
+    Step5 --> Step6[6. Configure Webhook URL & Verify Token in Meta WhatsApp App]
+    Step6 --> Step7[7. Subscribe to 'messages' field in Meta webhook setup]
+    Step7 --> Step8[8. Toggle ON 'Enable Global AI Auto-Replies']
+    Step8 --> Success([🎉 Connected! Chatbot starts replying instantly])
+
+    style Start fill:#10b981,stroke:#047857,color:#fff
+    style Success fill:#10b981,stroke:#047857,color:#fff
+    style Step5 fill:#4f46e5,stroke:#3730a3,color:#fff
+    style Step6 fill:#4f46e5,stroke:#3730a3,color:#fff
+```
+
+### 📋 Setup & Verification Guide
+
+1. **Get Meta Developer Details**:
+   - Visit the [Meta for Developers](https://developers.facebook.com/) portal.
+   - Setup a Business App, navigate to **WhatsApp** -> **API Setup**.
+   - Copy the **Phone Number ID** (e.g., `1055598124991`) and generate a permanent **System User Access Token**.
+
+2. **Save Settings in BizReply**:
+   - Log into BizReply and navigate to [System Settings](file:///c:/Users/arunk/Desktop/BizReply/frontend/src/pages/Settings.tsx).
+   - Enter your **WhatsApp Connected Number** (with country code), **Meta Phone ID**, and **Meta Cloud API Token**. Click **Save Settings**.
+
+3. **Configure Webhook in Meta**:
+   - In Meta Developers App, go to **WhatsApp** -> **Configuration**.
+   - Set **Callback URL** to: `https://<your-backend-api-url>/api/webhook` (for local dev, use an ngrok or localtunnel URL pointing to port `5000` or `5088`).
+   - Set **Verify Token** to the value of `META_WEBHOOK_VERIFY_TOKEN` (default is `your_custom_webhook_verify_token`).
+   - **Click Verify and Save**.
+   - Click **Manage Webhook Fields** and **Subscribe** to `messages`.
+
+---
+
 ## 🌟 Key Features
 
 1. **AI Auto-Responder (Hinglish/English)**:
